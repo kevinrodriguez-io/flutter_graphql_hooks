@@ -19,7 +19,7 @@ UseQueryHookResult<Map<String, dynamic>, _FetchFunction> useLazyQuery(
   GraphQLClient client,
 }) {
   final loading = useState(false);
-  final data = useState(null);
+  final data = useState<Map<String, dynamic>>(null);
   final error = useState<Exception>(null);
 
   final context = useContext();

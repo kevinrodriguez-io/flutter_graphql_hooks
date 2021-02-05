@@ -15,7 +15,7 @@ GraphQLHookResult<Map<String, dynamic>> useSubscription(
   GraphQLClient client,
 }) {
   final loading = useState(true);
-  final data = useState(null);
+  final data = useState<Map<String, dynamic>>(null);
   final error = useState<Exception>(null);
 
   final context = useContext();

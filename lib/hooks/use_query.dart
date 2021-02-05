@@ -16,7 +16,7 @@ UseQueryHookResult<Map<String, dynamic>, _RefetchFunction> useQuery(
   GraphQLClient client,
 }) {
   final loading = useState(true);
-  final data = useState(null);
+  final data = useState<Map<String, dynamic>>(null);
   final error = useState<Exception>(null);
 
   final context = useContext();

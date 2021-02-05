@@ -1,0 +1,21 @@
+name: flutter_graphql_hooks
+description: Apollo-Like GraphQL Hooks
+version: 0.0.1
+author: Kevin Rodriguez <_@kevinrodriguez.io>
+homepage: https://github.com/kevinrodriguez-io/flutter-graphql-hooks
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter_hooks: ^0.15.0
+  graphql_flutter: ^4.0.0-beta
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

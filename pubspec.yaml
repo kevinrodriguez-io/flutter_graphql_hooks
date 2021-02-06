@@ -1,5 +1,5 @@
 name: flutter_graphql_hooks
-description: Apollo-Like GraphQL Hooks
+description: A colleciton of apollo-like GraphQL Hooks to improve code readability.
 version: 1.0.2-beta
 homepage: https://github.com/kevinrodriguez-io/flutter-graphql-hooks
 

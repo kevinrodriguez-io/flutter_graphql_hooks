@@ -13,8 +13,11 @@ typedef _MutationFunction = Future<Map<String, dynamic>> Function({
 /// being held by the hook (data, loading, error); The function is also a
 /// [Future] that returns a [Map<String, dynamic>] and throws, allowing
 /// imperative usage.
-UseMutationHookResult<Map<String, dynamic>, _MutationFunction> useMutation(
-  MutationOptions mutationOptions, {
+///
+/// You must provide mutation options at either hook input level
+/// or as part of the params in the mutation function.
+UseMutationHookResult<Map<String, dynamic>, _MutationFunction> useMutation({
+  MutationOptions mutationOptions,
   GraphQLClient client,
 }) {
   final loading = useState(false);
@@ -25,10 +28,21 @@ UseMutationHookResult<Map<String, dynamic>, _MutationFunction> useMutation(
   final graphqlClient = client ?? GraphQLProvider.of(context).value;
 
   final _MutationFunction mutation = useMemoized(
-    () => ({MutationOptions options}) async {
+    () => ({
+      MutationOptions options,
+    }) async {
+      assert(
+        options != null || mutationOptions != null,
+        "You must provide mutation options at either hook input level or as part of the params in the mutation function.",
+      );
+      loading.value = true;
+      final shouldMerge = options != null && mutationOptions != null;
       try {
         final result = await graphqlClient.mutate(
-            options == null ? mutationOptions : mutationOptions.merge(options));
+          shouldMerge
+              ? mutationOptions.merge(options)
+              : options ?? mutationOptions,
+        );
         if (result.hasException) throw result.exception;
         data.value = result.data;
         return result.data;

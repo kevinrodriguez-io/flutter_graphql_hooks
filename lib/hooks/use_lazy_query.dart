@@ -14,8 +14,11 @@ typedef _FetchFunction = Future<Map<String, dynamic>> Function({
 /// which returns a function that is bound to the hook internal state.
 /// The fetch function returns a [Future<Map<String, dynamic>>] that will
 /// also throw an [Exception], allowing imperative usage.
-UseQueryHookResult<Map<String, dynamic>, _FetchFunction> useLazyQuery(
-  QueryOptions queryOptions, {
+///
+/// You must provide query options at either hook input level
+/// or as part of the params in the fetcher function.
+UseQueryHookResult<Map<String, dynamic>, _FetchFunction> useLazyQuery({
+  QueryOptions queryOptions,
   GraphQLClient client,
 }) {
   final loading = useState(false);
@@ -27,10 +30,15 @@ UseQueryHookResult<Map<String, dynamic>, _FetchFunction> useLazyQuery(
 
   final _FetchFunction fetcher = useMemoized(
     () => ({QueryOptions options}) async {
+      assert(
+        options != null || queryOptions != null,
+        "You must provide query options at either hook input level or as part of the params in the fetcher function.",
+      );
       loading.value = true;
+      final shouldMerge = options != null && queryOptions != null;
       try {
         final result = await graphqlClient.query(
-          options == null ? queryOptions : queryOptions.merge(options),
+          shouldMerge ? queryOptions.merge(options) : options ?? queryOptions,
         );
         if (result.hasException) throw result.exception;
         data.value = result.data;

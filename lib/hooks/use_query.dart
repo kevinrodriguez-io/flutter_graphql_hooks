@@ -44,11 +44,7 @@ QueryOperationResult<Map<String, dynamic>, _RefetchFunction> useQuery(
   }, const []);
 
   return QueryOperationResult(
-    OperationResult(
-      data.value,
-      loading.value,
-      error.value,
-    ),
+    OperationResult(data.value, loading.value, error.value),
     fetcher,
   );
 }

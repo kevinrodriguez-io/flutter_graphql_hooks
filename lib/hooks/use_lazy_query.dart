@@ -54,11 +54,7 @@ QueryOperationResult<Map<String, dynamic>, _FetchFunction> useLazyQuery({
   );
 
   return QueryOperationResult(
-    OperationResult(
-      data.value,
-      loading.value,
-      error.value,
-    ),
+    OperationResult(data.value, loading.value, error.value),
     fetcher,
   );
 }

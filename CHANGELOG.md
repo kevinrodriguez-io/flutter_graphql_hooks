@@ -1,6 +1,7 @@
 ## [1.0.3-beta] - 07-02-2021.
 
 * Cleaning up naming convention for return types.
+* Code cleanup.
 
 ## [1.0.2-beta] - 05-02-2021.
 

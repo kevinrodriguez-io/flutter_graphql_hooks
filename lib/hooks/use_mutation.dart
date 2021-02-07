@@ -57,11 +57,7 @@ MutationOperationResult<Map<String, dynamic>, _MutationFunction> useMutation({
   );
 
   return MutationOperationResult(
-    OperationResult(
-      data.value,
-      loading.value,
-      error.value,
-    ),
+    OperationResult(data.value, loading.value, error.value),
     mutation,
   );
 }

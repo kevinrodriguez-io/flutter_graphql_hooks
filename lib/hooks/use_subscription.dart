@@ -51,9 +51,5 @@ OperationResult<Map<String, dynamic>> useSubscription(
     return _noop;
   }, [loading, data, error, graphqlClient, snap]);
 
-  return OperationResult(
-    data.value,
-    loading.value,
-    error.value,
-  );
+  return OperationResult(data.value, loading.value, error.value);
 }

@@ -1,3 +1,7 @@
+## [1.0.3-beta] - 07-02-2021.
+
+* Cleaning up naming convention for return types.
+
 ## [1.0.2-beta] - 05-02-2021.
 
 * Fixed issue with loading state for mutations.

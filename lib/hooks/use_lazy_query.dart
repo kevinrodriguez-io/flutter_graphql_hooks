@@ -1,8 +1,8 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../types/graphql_hook_result.dart';
-import '../types/use_query_hook_result.dart';
+import '../types/operation_result.dart';
+import '../types/query_operation_result.dart';
 import '../tools/query_options_extensions.dart';
 
 typedef _FetchFunction = Future<Map<String, dynamic>> Function({
@@ -17,7 +17,7 @@ typedef _FetchFunction = Future<Map<String, dynamic>> Function({
 ///
 /// You must provide query options at either hook input level
 /// or as part of the params in the fetcher function.
-UseQueryHookResult<Map<String, dynamic>, _FetchFunction> useLazyQuery({
+QueryOperationResult<Map<String, dynamic>, _FetchFunction> useLazyQuery({
   QueryOptions queryOptions,
   GraphQLClient client,
 }) {
@@ -53,8 +53,8 @@ UseQueryHookResult<Map<String, dynamic>, _FetchFunction> useLazyQuery({
     [loading, data, error, graphqlClient, queryOptions],
   );
 
-  return UseQueryHookResult(
-    GraphQLHookResult(
+  return QueryOperationResult(
+    OperationResult(
       data.value,
       loading.value,
       error.value,

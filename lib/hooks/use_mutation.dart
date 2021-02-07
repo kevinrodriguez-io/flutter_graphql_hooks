@@ -1,8 +1,8 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../types/use_mutation_hook_result.dart';
-import '../types/graphql_hook_result.dart';
+import '../types/mutation_operation_result.dart';
+import '../types/operation_result.dart';
 import '../tools/mutation_options_extensions.dart';
 
 typedef _MutationFunction = Future<Map<String, dynamic>> Function({
@@ -16,7 +16,7 @@ typedef _MutationFunction = Future<Map<String, dynamic>> Function({
 ///
 /// You must provide mutation options at either hook input level
 /// or as part of the params in the mutation function.
-UseMutationHookResult<Map<String, dynamic>, _MutationFunction> useMutation({
+MutationOperationResult<Map<String, dynamic>, _MutationFunction> useMutation({
   MutationOptions mutationOptions,
   GraphQLClient client,
 }) {
@@ -56,8 +56,8 @@ UseMutationHookResult<Map<String, dynamic>, _MutationFunction> useMutation({
     [loading, data, error, graphqlClient, mutationOptions],
   );
 
-  return UseMutationHookResult(
-    GraphQLHookResult(
+  return MutationOperationResult(
+    OperationResult(
       data.value,
       loading.value,
       error.value,

@@ -1,8 +1,8 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../types/graphql_hook_result.dart';
-import '../types/use_query_hook_result.dart';
+import '../types/operation_result.dart';
+import '../types/query_operation_result.dart';
 
 final _noop = () => {};
 
@@ -11,7 +11,7 @@ typedef _RefetchFunction = Future<void> Function();
 /// Runs the given query defined by the options param([QueryOptions]) immediately
 /// after the Widget is built (see [useEffect] usage). The fetcher function is not meant
 /// to throw errors and these are stored in the error field.
-UseQueryHookResult<Map<String, dynamic>, _RefetchFunction> useQuery(
+QueryOperationResult<Map<String, dynamic>, _RefetchFunction> useQuery(
   QueryOptions queryOptions, {
   GraphQLClient client,
 }) {
@@ -43,8 +43,8 @@ UseQueryHookResult<Map<String, dynamic>, _RefetchFunction> useQuery(
     return _noop;
   }, const []);
 
-  return UseQueryHookResult(
-    GraphQLHookResult(
+  return QueryOperationResult(
+    OperationResult(
       data.value,
       loading.value,
       error.value,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../types/graphql_hook_result.dart';
+import '../types/operation_result.dart';
 
 final _noop = () => {};
 
@@ -10,7 +10,7 @@ final _noop = () => {};
 /// function, since it's nature is the one of a [Stream].
 /// It will subscribe to the given subscription and unsubscribe thanks to
 /// the internal usage of [useStream].
-GraphQLHookResult<Map<String, dynamic>> useSubscription(
+OperationResult<Map<String, dynamic>> useSubscription(
   SubscriptionOptions subscriptionOptions, {
   GraphQLClient client,
 }) {
@@ -51,7 +51,7 @@ GraphQLHookResult<Map<String, dynamic>> useSubscription(
     return _noop;
   }, [loading, data, error, graphqlClient, snap]);
 
-  return GraphQLHookResult(
+  return OperationResult(
     data.value,
     loading.value,
     error.value,

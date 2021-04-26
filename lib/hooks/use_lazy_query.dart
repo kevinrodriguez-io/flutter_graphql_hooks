@@ -1,6 +1,7 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import '../types/hook_options.dart';
 import '../types/operation_result.dart';
 import '../types/query_operation_result.dart';
 import '../tools/query_options_extensions.dart';
@@ -20,6 +21,7 @@ typedef _FetchFunction = Future<Map<String, dynamic>> Function({
 QueryOperationResult<Map<String, dynamic>, _FetchFunction> useLazyQuery({
   QueryOptions queryOptions,
   GraphQLClient client,
+  HookOptions hookOptions = const HookOptions(true),
 }) {
   final loading = useState(false);
   final data = useState<Map<String, dynamic>>(null);
@@ -45,7 +47,10 @@ QueryOperationResult<Map<String, dynamic>, _FetchFunction> useLazyQuery({
         return result.data;
       } catch (e) {
         error.value = e;
-        throw e;
+        if (hookOptions.throwsOnMethodExecution) {
+          throw e;
+        }
+        return Map<String, dynamic>();
       } finally {
         loading.value = false;
       }

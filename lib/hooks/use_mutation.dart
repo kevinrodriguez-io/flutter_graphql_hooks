@@ -1,6 +1,7 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import '../types/hook_options.dart';
 import '../types/mutation_operation_result.dart';
 import '../types/operation_result.dart';
 import '../tools/mutation_options_extensions.dart';
@@ -19,6 +20,7 @@ typedef _MutationFunction = Future<Map<String, dynamic>> Function({
 MutationOperationResult<Map<String, dynamic>, _MutationFunction> useMutation({
   MutationOptions mutationOptions,
   GraphQLClient client,
+  HookOptions hookOptions = const HookOptions(true),
 }) {
   final loading = useState(false);
   final data = useState<Map<String, dynamic>>(null);
@@ -48,7 +50,10 @@ MutationOperationResult<Map<String, dynamic>, _MutationFunction> useMutation({
         return result.data;
       } catch (e) {
         error.value = e;
-        throw e;
+        if (hookOptions.throwsOnMethodExecution) {
+          throw e;
+        }
+        return Map<String, dynamic>();
       } finally {
         loading.value = false;
       }

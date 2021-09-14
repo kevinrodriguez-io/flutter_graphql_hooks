@@ -1,5 +1,5 @@
 <h1 align="center">Flutter GraphQL Hooks 🪝</h1>
-
+<pre>LOOKING FOR MAINTAINERS</pre>
 <p align="center">
   <a href="https://github.com/kevinrodriguez-io/flutter_graphql_hooks/watchers"><img src="https://img.shields.io/github/watchers/kevinrodriguez-io/flutter_graphql_hooks?style=social" alt="Watch on GitHub" /></a>
   <a href="https://github.com/kevinrodriguez-io/flutter_graphql_hooks/stargazers"><img src="https://img.shields.io/github/stars/kevinrodriguez-io/flutter_graphql_hooks?style=social" alt="Star on GitHub" /></a>
